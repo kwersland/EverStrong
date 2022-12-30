@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.first_name}}'s Workouts</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header" class="d-flex align-items-center justify-content-around">
+        <a href="/"><img id="logo" src="{{ url_for('static', filename='img/logo.PNG') }}"></a>
+        <div id="right" class="d-flex align-items-center justify-content-end col2">
+            <a href="/profile"><img id="profile" src="{{ url_for('static', filename='img/profile.png') }}" alt=""></a>
+            {% if user.id %}
+            <a id="nav" class="btn btn-light" href="/logout">Log Out</a>
+            {% else %}
+            <a id="nav" class="btn btn-light" href="/login">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- User's Workouts -->
+    <div class="p-5">
+        <div class="d-flex justify-content-between align-items-center ms-5 me-5 mb-1 border-bottom min-vw-75">
+            <h1> {{user.first_name}}'s Workouts</h1>
+        </div>
+        <div>
+            <ul class="list-group p-3">
+                {% for workout in workouts %}
+                <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <h4>{{workout.day | capitalize}}: {{workout.name}}</h4>
+                    {% if workout.author.id != user.id %}
+                    <h4>Posted By: {{workout.author.first_name}} {{workout.author.last_name}}</h4>
+                    {% endif %}
+                    <div>
+                        <a class="btn" onclick="on('overlay')">schedule</a>
+                        <a class="btn" href="/workouts/view/{{workout.id}}">view</a>
+                        <a class="btn" href="/workouts/delete/{{workout.id}}">delete</a>
+                    </div>
+                    <!-- Schedule Workout Popup -->
+                    <div id="overlay" class="col justify-content-center">
+                        <form class="rounded border" action="/workouts/update/{{workout.id}}" method="POST">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="text-dark">Schedule Workout:</h3>
+                            </div>
+                            <h4 class ="pt-2 text-dark">Current Schedule: {{workout.day | capitalize}}</h4>
+                            <select class="form-control" name="day" id="day" value="{{workout.day}}">
+                                <option value="no_schedule">Not Scheduled</option>
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday">Sunday</option>
+                            </select>
+
+                            <input type="hidden" name="name" value="{{workout.name}}">
+                            <input type="hidden" name="user_id" value="{{user.id}}">
+                
+                            <button class="btn btn-dark mt-2">Schedule</button>
+                            <a class="btn btn-secondary mt-2" onclick="off('overlay')">Cancel</a>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <a class="btn btn-light m-2 col-3 ms-3" href="/dashboard">Home</a>
+            <a class="btn btn-dark m-2 col-3 ms-3" href="/workouts/create">Add Workout</a>
+        </div>
+    </div>
+
+    <!-- links -->
+    <div id="bottom" class="d-flex align-items-center bg-light border-top">
+        <div id="links" class="d-flex flex-column justify-content-center bg-light">
+            <h3>EverStrong, LLC</h3>
+            <h5>a wersland company</h5>
+            <h5>made by Karsten Wersland</h5>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>

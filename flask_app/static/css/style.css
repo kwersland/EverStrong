@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: neue-haas-grotesk-display;
+    font-style: normal;
+    font-weight: 400;;
+}
+
+/* general tags */
+
+.d-flex {
+    display: flex;
+}
+
+.just-cont-center {
+    justify-content: center;
+}
+
+.just-cont-between {
+    justify-content: space-between;
+}
+
+.just-cont-around {
+    justify-content: space-around;
+}
+
+.just-cont-evenly {
+    justify-content: space-evenly;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-top {
+    align-items: flex-start;
+}
+
+.align-bottom {
+    align-items: flex-end;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.col1 {
+    flex: 1;
+}
+
+.col2 {
+    flex: 2;
+}
+
+.col3 {
+    flex: 3;
+}
+
+.ps-30 {
+    padding-left: 30px;
+}
+
+
+/* Header */
+
+#header {
+    /* background: rgb(160, 161, 157); */
+    background-color: rgb(02,02,02);
+    border-top: solid 2px rgb(34, 34, 34);
+    color: white;
+    height: 110px;
+}
+
+#logo {
+    width: 300px;
+    padding-left: 50px;
+}
+
+#right a {
+    font-size: larger;
+    font-style: normal;
+    text-decoration: none;
+    margin: 0px;
+}
+
+/* profile */
+
+#profile {
+    height: 50px;
+    width: 50px;
+}
+
+/* Sign up */
+
+#nav {
+    font-size: large;
+    color:black;
+}
+
+/* Main */
+
+#body {
+    background: url(/static/img/IMG_0050.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#slogan {
+    padding: 5%;
+    padding-top: 20%;
+}
+
+#slogan h1, h2, a {
+    padding: 20px;
+    color: white;
+}
+
+#slogan a {
+    font-size: x-large;
+    color: rgb(160, 161, 157);
+}
+
+/* programs */
+
+#programs {
+    background-color: rgb(34, 34, 34) ;
+    color: white;
+    font-size: xx-large;
+    padding: 40px;
+}
+
+#programs h1 {
+    margin-left: 45px;
+}
+
+#programs button {
+    margin-left: 45px;
+}
+
+
+#images video {
+    /* border: 2px solid black; */
+    margin: 30px;
+    height: 350px;
+    
+}
+
+#image2 {
+    /* border: 2px solid black; */
+    margin: 30px;
+    height: 350px;
+    width: 600px;
+}
+
+#images {
+    margin-left: 15px;
+}
+
+
+/* Footer */
+
+#footer {
+    background-color:rgb(02,02,02);
+    color: white;
+    padding: 30px;
+}
+
+#footer h2 {
+    font-size: xx-large;
+    padding: 40px;
+    flex: 2;
+}
+
+#right {
+    padding: 40px;
+    flex: 1;
+}
+
+#right h4 {
+    padding: 20px;
+}
+
+#learn button {
+    margin-top: 20px;
+    color:black;
+}
+
+/* page bottom */
+
+
+#bottom {
+    padding-left: 30px;
+    position: fixed;
+    bottom: 0;
+    height: 186px;
+    width: 100%;
+}
+
+#links{
+    background-color: white;
+    margin: 40px;
+}
+
+#links h3 {
+    color: black;
+}
+
+#links h4 {
+    margin-left: 20px;
+}
+
+#pages h4 {
+    color: rgb(160, 161, 157);
+    padding: 0px;
+    text-decoration: underline;
+}
+
+
+/* Login and Register */
+
+#form {
+    margin-left: 33.333854%;
+    margin-right: 33.333854%;
+}
+
+
+/* Dashboard */
+
+dashboard div {
+    border: solid rgb(194, 194, 194) 1px;
+    height: 600px;
+    width: 500px;
+}
+
+.text-grey {
+    color: lightgray;
+}
+
+.bg-gray {
+    background-color: rgb(76, 75, 75);
+}
+
+/* Drop Down */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Pop up */
+
+#overlay {
+    position: fixed;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255, .5);
+    z-index: 2;
+    padding-left: 25%;
+    padding-top: 10%;
+}
+
+#overlay form {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    background-color: white;
+    padding: 20px;
+}
+
+#schedule {
+    position: fixed;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255, .5);
+    z-index: 2;
+    padding-left: 25%;
+    padding-top: 10%;
+}
+
+#schedule form {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    background-color: white;
+    padding: 20px;
+}
+
+#exercise {
+    display: none;
+}
+
+#close {
+    height: 10px;
+}

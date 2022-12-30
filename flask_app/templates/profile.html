@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+    <div id="allcontent">
+        <!-- header -->
+        <div id="header" class="d-flex align-items-center justify-content-around">
+            <a href="/"><img id="logo" src="{{ url_for('static', filename='img/logo.PNG') }}"></a>
+            <div id="right" class="d-flex align-items-center justify-content-end col2">
+                <a href="/profile"><img id="profile" src="{{ url_for('static', filename='img/profile.png') }}" alt=""></a>
+                {% if user.id %}
+                <a id="nav" class="btn btn-light" href="/logout">Log Out</a>
+                {% else %}
+                <a id="nav" class="btn btn-light" href="/login">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Profile info -->
+        <div class="container">
+            <h1 class="text-dark m-3">{{user.first_name}}'s Profile</h1>
+            <ul class="list-group p-3">
+                <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <h3>Name:</h3>
+                    <h3 onclick="on('overlay')">{{user.first_name + " " + user.last_name}}</h3>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <h3>Email:</h3>
+                    <h3 onclick="on('overlay')">{{user.email}}</h3>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <h3>Current Weight:</h3>
+                    <h3 onclick="on('overlay')">{{user.weight}} lbs</h3>
+                </li>
+                <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <h3>Goal Weight:</h3>
+                    <h3 onclick="on('overlay')">{{user.goal_weight}} lbs</h3>
+                </li>
+            <div class="d-flex">
+                <button class="btn btn-dark mt-2 me-2 col-3" onclick="on('overlay')">Edit Profile</button>
+                <!-- <a href="/users/delete/{{user.id}}" class="btn btn-secondary col-2 mt-2 me-2">Delete Profile</a> -->
+                <a href="/dashboard" class="btn btn-light mt-2 col-2">Back</a>
+            </div>
+        </div>
+    
+        <!-- Edit Profile Pop-up -->
+        <div id="overlay" class="col align-self-center">
+            <form class="rounded border" action="/users/update" method="POST">
+                <div class="d-flex justify-content-between">
+                    <h3 class="text-dark">Edit Profile:</h3>
+                </div>
+                <input type="hidden" name="id" value="{{user.id}}">
+                <label class="form-label mt-2"for="first_name">First Name:</label>
+                <input class="form-control" type="text" name="first_name" id="first_name" value="{{user.first_name}}"> 
+                <label  class="form-label mt-2" for="last_name">Last:</label>
+                <input class="form-control" type="text" name="last_name" id="last_name" value="{{user.last_name}}">
+                <label class="form-label" for="email">Email:</label>
+                <input class="form-control" type="text" name="email" id="email" value="{{user.email}}">
+                <label class="form-label" for="weight">Current Weight:</label>
+                <output>{{user.weight}}</output>
+                <input class="form-range" type="range" min="0" max="400" name="weight"id="weight" value="{{user.weight}}" oninput="this.previousElementSibling.value = this.value">
+                
+                <label class="form-label" for="goal_weight">Goal Weight:</label>
+                <output>{{user.goal_weight}}</output>
+                <input class="form-range" type="range" min="0" max="400" name="goal_weight" id="goal_weight"  value="{{user.goal_weight}}" oninput="this.previousElementSibling.value = this.value">
+    
+                <button class="btn btn-dark mt-2">Update</button>
+                <a class="btn btn-secondary mt-2" onclick="off('overlay')">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- links -->
+    <div id="bottom" class="d-flex align-items-center bg-light border-top">
+        <div id="links" class="d-flex flex-column justify-content-center bg-light">
+            <h3>EverStrong, LLC</h3>
+            <h5>a wersland company</h5>
+            <h5>made by Karsten Wersland</h5>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>

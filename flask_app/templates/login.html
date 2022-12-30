@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverStrong Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+
+    <!-- header -->
+    <div id="header" class="d-flex align-items-center justify-content-around">
+        <a href="/"><img id="logo" src="{{ url_for('static', filename='img/logo.PNG') }}"></a>
+        <div id="right" class="d-flex align-items-center justify-content-end col2">
+            <!-- <a href="/Shop">Shop</a> -->
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="form" class="mt-5 mb-5 p-5 col-4" action="/login" method="POST">
+        <h1 class="text-dark">EverStrong Login</h1>
+        {% for message in get_flashed_messages(category_filter = ['log']) %}
+        <p class="text-danger">*{{message}}</p>
+        {% endfor %}
+
+        <!-- login email -->
+        <label class="pt-2 text-dark form-label" for="email">Email:</label>
+        <input class="form-control" type="text" name="email" id="email">
+
+        <!-- login password -->
+        <label class="pt-2 text-dark form-label" for="password">Password:</label>
+        <input class="form-control" type="password" name="password" id="password">
+
+        <!-- login button -->
+        <div class="d-flex align-items-center justify-content-between mt-3">
+            <button class="btn btn-dark">Login</button>
+            <p class="text-dark" >Don't have an account? <a class="text-dark" href="/users/register">Sign Up!</a></p>
+        </div>
+    </form>
+
+
+    <!-- footer -->
+    <footer id="footer" class="d-flex align-items-center">
+        <h2>We focus on building habits and setting goals to <br> 
+            create lasting improvement in the fitness and 
+            <br>health of our clients</h2>
+        <div id="learn">
+            <h4>Learn more about strength training for
+                longevity.</h4>
+            <button class="btn btn-light">Learn More</button>
+        </div>
+    </footer>
+
+    <!-- links -->
+    <div class="d-flex align-items-center bg-light border-top">
+        <div id="links" class="d-flex flex-column justify-content-center bg-light">
+            <h3>EverStrong, LLC</h3>
+            <h5>a wersland company</h5>
+            <h5>made by Karsten Wersland</h5>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Workout</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+
+    <!-- header -->
+    <div id="header" class="d-flex align-items-center justify-content-around">
+        <a href="/"><img id="logo" src="{{ url_for('static', filename='img/logo.PNG') }}"></a>
+        <div id="right" class="d-flex align-items-center justify-content-end col2">
+            <a href="/profile"><img id="profile" src="{{ url_for('static', filename='img/profile.png') }}" alt=""></a>
+            {% if user.id %}
+            <a id="nav" class="btn btn-light" href="/logout">Log Out</a>
+            {% else %}
+            <a id="nav" class="btn btn-light" href="/login">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Schedule Workout Form -->
+    <form id="form" class="p-3 col-4 form" action="/workouts/add" method="POST">
+        <h1 class="text-dark">Schedule Workout</h1>
+
+        <label class="pt-2 text-dark form-label" for="name">Name:</label>
+        {% for message in get_flashed_messages(category_filter = ['name']) %}
+        <p class="text-danger">*{{message}}</p>
+        {% endfor %}
+        <input class="form-control" type="text" name="name" id="name" value="{{workout.name}}">
+
+        <label class="pt-2 text-dark form-label" for="day">Schedule:</label>
+        {% for message in get_flashed_messages(category_filter = ['day']) %}
+        <p class="text-danger">*{{message}}</p>
+        {% endfor %}
+        <select class="form-control" name="day" id="day">
+            <option type="hidden" value="no_schedule">Not Scheduled</option>
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
+
+        <input type="hidden" name="posted_by" value="{{workout.posted_by}}">
+        <input type="hidden" name="user_id" value="{{user.id}}">
+        <input type="hidden" name="exercises" value="{{workout.exercises}}">
+        <input type="hidden" name="id" value="{{workout.id}}">
+
+        <button class="btn btn-dark mt-2 me-2">Add Workout</button>
+        <a href="/workouts/view/{{workout.id}}" class="btn btn-light mt-2">Back</a>
+    </form>
+
+    <!-- links -->
+    <div id="bottom" class="d-flex align-items-center bg-light border-top">
+        <div id="links" class="d-flex flex-column justify-content-center bg-light">
+            <h3>EverStrong, LLC</h3>
+            <h5>a wersland company</h5>
+            <h5>made by Karsten Wersland</h5>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>

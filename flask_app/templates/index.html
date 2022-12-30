@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverStrong Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+    <!-- header -->
+    <div id="header" class="d-flex align-items-center justify-content-around">
+        <a href="/"><img id="logo" src="{{ url_for('static', filename='img/logo.PNG') }}"></a>
+        <div id="right" class="d-flex align-items-center justify-content-end col2">
+            <!-- <a href="/Shop">Shop</a> -->
+            <div class="dropdown">
+                <img id="dropdown_image" onmouseover="change()" onmouseout="revert()" src="{{ url_for('static', filename='img/96.png') }}">
+                <div class="dropdown-content" onmouseover="change()" onmouseout="revert()">
+                        <a id="nav" class="" href="/users/login">Login</a>
+                        <a id="nav" class="" href="/users/register">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main -->
+    <div id="body">
+        <div id="slogan">
+            <h1>Get Stronger, Live Longer</h1>
+            <h2>Create sustainable habits to help strengthen your body <br>
+                to increase the length and quality of life.</h2>
+            <a href="#">Learn More</a>
+        </div>
+    </div>
+    <div id="programs">
+        <h1>The EverStrong Workout Ways</h1>
+        <div id="images" class="d-flex justify-content-around">
+                <video src="{{ url_for('static', filename='img/squat.mov') }}" muted loop onmouseover="play(this)" onmouseout="pause(this)"><a href="#">Build Your Own</a></video>
+                <video src="{{ url_for('static', filename='img/lift.mov') }}" muted loop onmouseover="play(this)" onmouseout="pause(this)"><a href="#">PDF Workouts</a></video>
+        </div>
+        <button class="btn btn-outline-light">More Info</button>
+    </div>
+
+    <!-- footer -->
+    <footer id="footer" class="d-flex align-items-center">
+        <h2>Focus on building habits and setting goals to <br> 
+            create lasting improvement in your fitness and 
+            <br>health</h2>
+        <div id="learn">
+            <h4>Learn more about strength training for
+                longevity.</h4>
+            <button class="btn btn-light">Learn More</button>
+        </div>
+    </footer>
+
+    <!-- links -->
+    <div class="d-flex align-items-center bg-light border-top">
+        <div id="links" class="d-flex flex-column justify-content-center bg-light">
+            <h3>EverStrong, LLC</h3>
+            <h5>a wersland company</h5>
+            <h5>made by Karsten Wersland</h5>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>
