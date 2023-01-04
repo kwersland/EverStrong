@@ -36,12 +36,20 @@
             {% if user.id == posted_by.id %}
             <div class="border-end p-5 col-4">
                 <h4 class="pt-2 text-dark form-label">Scheduled for:</h4>
+                {% if workout.day == "no_schedule" %}
+                <h5>Not Scheduled</h5>
+                {% else %}
                 <h5>{{workout.day | capitalize}}</h5>
+                {% endif %}
             </div>
             {% else %}
             <div class="border-end p-5 col-4">
                 <h4 class="pt-2 text-dark form-label">Scheduled for:</h4>
+                {% if workout.day == "no_schedule" %}
+                <h5>Not Scheduled</h5>
+                {% else %}
                 <h5>{{workout.day | capitalize}}</h5>
+                {% endif %}
             </div>
             <div class="border-end p-5 col-4">
                 <h4 class="pt-2 text-dark form-label">Posted By:</h4>
@@ -52,9 +60,9 @@
             <!-- Add/View Exercises -->
             <div class="p-5 col-4">
                 <h4>Exercises:</h4>
-                <ul class="list-group">
+                <ul id="scroll_exercises" class="list-group">
                     {% for exercise in exercises %}
-                    <li class="d-flex justify-content-between list-group-item form-check form-switch">
+                    <li id="exercise_size" class="d-flex justify-content-between list-group-item form-check form-switch">
                         {% if not exercise.description %}
                         <h4>{{exercise.name | capitalize}}</h4>
                         {% else %}
@@ -63,12 +71,12 @@
                             <h5>{{exercise.description | capitalize}}</h5>
                         </div>
                         {% endif %}
-                        <div class="text-end">
-                            <h4>{{exercise.sets}} sets of {{exercise.reps}}</h4>
-                            {% if posted_by.id == user.id %}
-                            <a class="text-dark" href="/exercises/delete/{{exercise.workout}}/{{exercise.id}}">delete</a>
-                            {% endif %}
-                        </div>
+                            <div class="text-end d-flex align-items-center">
+                                <h5>{{exercise.sets}} sets of {{exercise.reps}}</h5>
+                                {% if posted_by.id == user.id %}
+                                <a class="btn btn-light text-dark no_padding" href="/exercises/delete/{{exercise.workout}}/{{exercise.id}}">delete</a>
+                                {% endif %}
+                            </div>
                     </li>
                     {% endfor %}
                 </ul>
@@ -77,8 +85,8 @@
                 {% endif %}
             </div>
         </div>
-        {% if user.id == workout.user %}
-        <a class="btn btn-dark mt-2 me-2 col-3" onclick="on('schedule')">Change Schedule</a>
+        {% if user.id == workout.user_id %}
+        <a class="btn btn-dark mt-2 me-2 col-3" onclick="on('schedule')">Update Schedule</a>
         {% else %}
         <a class="btn btn-dark mt-2 me-2 col-3" href="/workouts/add_schedule/{{workout.id}}">Add to Your Schedule</a>
         {% endif %}

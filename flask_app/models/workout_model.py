@@ -48,9 +48,13 @@ class Workout:
     # Delete Workout
     @classmethod
     def delete_workout(cls, data):
-        query = "DELETE FROM workouts WHERE id = %(id)s"
+        query2 = "DELETE FROM exercises WHERE workout_id = %(id)s;"
+        results2 = connectToMySQL(DATABASE).query_db(query2, data)
+        query = "DELETE FROM workouts WHERE id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if not results:
+            return False
+        if not results2:
             return False
         return results
 
@@ -101,7 +105,7 @@ class Workout:
     @staticmethod
     def validate(workout_data):
         is_valid = True
-        if len(workout_data['name']) < 3:
+        if len(workout_data['name']) < 2:
             flash("Workout must have a name","name")
             is_valid = False
         data = {
@@ -109,11 +113,14 @@ class Workout:
         }
         my_workouts = Workout.get_mine(data)
         count = 0
+        if workout_data['day'] == "no_schedule":
+            is_valid = True
+            return is_valid
         for workout in my_workouts:
             if workout_data['day'] == workout.day:
                 count += 1
-                print(count)
-            if count >= 2:
-                flash(f"There are already two workouts assigned to {workout_data['day']}", "day")
+            if count >= 1:
+                flash(f"There is already a workout assigned to {workout_data['day']}", "day")
                 is_valid = False
+                return is_valid
         return is_valid

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{user.name}}'s Workouts</title>
+    <title>Public Workouts</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
 </head>
@@ -26,11 +26,12 @@
     <div class="p-5">
         <div class="d-flex justify-content-between align-items-center ms-5 me-5 mb-1 border-bottom min-vw-75">
             <h1> All Workouts</h1>
+            <a class="btn btn-light" href="/dashboard">Dashboard</a>
         </div>
         <div>
             
             <!-- All Workout lists -->
-            <ul class="list-group p-3">
+            <ul id="workout_list" class="list-group p-3">
                 {% for workout in workouts %}
                 {% if workout.user_id == workout.author.id %}
                 <li class="list-group-item list-group-item-action d-flex justify-content-between">
@@ -74,8 +75,35 @@
                 {% endif %}
                 {% endfor %}
             </ul>
-            <a class="btn btn-light m-2 col-3 ms-3" href="/dashboard">Home</a>
-            <a class="btn btn-dark m-2 col-3 ms-3" href="/workouts/create">Add Workout</a>
+            <a class="btn btn-dark m-2 col-3 ms-3" onclick="on('workout')">Add Workout</a>
+        </div>
+            <!-- Add Workout Popup -->
+        <div id="workout" class="col justify-content-center">
+            <form class="rounded border" action="/workouts/new" method="POST">
+                <div class="d-flex justify-content-between">
+                    <h3 class="text-dark">Add Workout:</h3>
+                </div>
+                <label class="form-label mt-2"for="name">Name:</label>
+                <input class="form-control" type="text" name="name" id="name">
+
+                <label class ="pt-2 text-dark form-label">Schedule:</label>
+                <select class="form-control" name="day" id="day">
+                    <option value="no_schedule">Not Scheduled</option>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                    <option value="sunday">Sunday</option>
+                </select>
+
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <input type="hidden" name="posted_by" value="{{user.id}}">
+
+                <button class="btn btn-dark mt-2">Create</button>
+                <a class="btn btn-secondary mt-2" onclick="off('workout')">Cancel</a>
+            </form>
         </div>
     </div>
 

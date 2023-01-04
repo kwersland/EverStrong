@@ -316,10 +316,68 @@ dashboard div {
     padding: 20px;
 }
 
+#workout {
+    position: fixed;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255, .5);
+    z-index: 2;
+    padding-left: 25%;
+    padding-top: 10%;
+}
+
+#workout form {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    background-color: white;
+    padding: 20px;
+}
+
 #exercise {
     display: none;
 }
 
 #close {
     height: 10px;
+}
+
+
+/* scroll divs */
+
+#scroll {
+    overflow: scroll;
+    height: 425px;
+}
+
+#scroll_exercises {
+    overflow: auto;
+    max-height: 440px;
+}
+
+/* exercise list size in view one workout */
+
+#exercise_size {
+    min-height: 60px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.no_padding {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 8px;
+    margin-left: 5px;
+}
+
+
+/* Workout list scroll */
+#workout_list {
+    overflow: auto;
+    max-height: 582px;
 }
