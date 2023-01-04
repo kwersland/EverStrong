@@ -30,7 +30,7 @@ class Workout:
     #Workout edit
     @classmethod
     def update(cls, data):
-        query = "UPDATE workouts SET name = %(name)s, day = %(day)s;" \
+        query = "UPDATE workouts SET name = %(name)s, day = %(day)s" \
         " WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
