@@ -18,7 +18,8 @@ def read_all():
         'id': session['user_id']
     }
     user = User.get_by_id(data)
-    return render_template('all_workouts.html', workouts = all_workouts, user = user)
+    weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    return render_template('all_workouts.html', workouts = all_workouts, user = user, weekdays = weekdays)
 
 
 
@@ -30,7 +31,8 @@ def read_mine():
     }
     user = User.get_by_id(data)
     my_workouts = Workout.get_mine(data)
-    return render_template('my_workouts.html', workouts = my_workouts, user = user)
+    weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    return render_template('my_workouts.html', workouts = my_workouts, user = user, weekdays = weekdays)
 
 
 
@@ -78,7 +80,7 @@ def del_workout(id):
 @app.route("/workouts/update/<int:id>", methods=["POST"])
 def update_workout(id):
     if not Workout.validate(request.form):
-        return redirect(f'/workouts/view/{id}')
+        return redirect(f'/my_workouts/view')
     data = {
         ** request.form,
         "id": id

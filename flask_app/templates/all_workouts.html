@@ -37,11 +37,32 @@
                 <li class="list-group-item list-group-item-action d-flex justify-content-between">
                     <h4>{{workout.name}} - {{workout.author.first_name + ' ' + workout.author.last_name}}</h4>
 
-                    <div>
+                    <div class="d-flex align-items-center">
                         {% if user.id == workout.author.id %}
-                        <a class="btn" onclick="on('overlay')">schedule</a>
-                        <a class="btn" href="/workouts/delete/{{workout.id}}">delete</a>
+                        <form class=" d-flex" action="/workouts/update/{{workout.id}}" method="POST">
+                            <div>
+                                <p class="pe-2">Edit</p>
+                                <img id="arrow" src="{{ url_for('static', filename='img/arrow.png') }}">
+                            </div>
+
+                            <select class="form-select" name="day" id="day">
+                                <option value="{{workout.day}}">{{workout.day | capitalize}}</option>
+                                {% for day in weekdays %}
+                                {% if day != workout.day %}
+                                <option value="{{day}}">{{day | capitalize}}</option>
+                                {% endif %}
+                                {% endfor %}
+                                <option value="no_schedule">No Schedule</option>
+                            </select>
+                            
+                            <input type="hidden" name="name" value="{{workout.name}}">
+                            <input type="hidden" name="user_id" value="{{user.id}}">
+                            
+                            <button class="btn">update</button>
+                        </form>
+                        
                         <a class="btn" href="/workouts/view/{{workout.id}}">view</a>
+                        <a class="btn" href="/workouts/delete/{{workout.id}}">delete</a>
                         {% else %}
                         <a class="btn" href="/workouts/view/{{workout.id}}">view</a>
                         {% endif %}
